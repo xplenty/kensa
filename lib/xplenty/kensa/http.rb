@@ -1,6 +1,6 @@
 require 'restclient'
 
-module Heroku
+module Xplenty
   module Kensa
     module HTTP
 

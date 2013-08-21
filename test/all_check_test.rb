@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class AllCheckTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
   include ProviderMock
   include FsMock
 

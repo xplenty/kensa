@@ -2,7 +2,7 @@ require 'test/helper'
 require 'cgi'
 
 class SsoTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
 
   context "with GET" do
     setup do
@@ -18,7 +18,7 @@ class SsoTest < Test::Unit::TestCase
       data = CGI.parse(query)
 
 
-      assert_equal "#{@data['api'][env]}heroku/resources/1", url 
+      assert_equal "#{@data['api'][env]}xplenty/resources/1", url 
       assert_equal 'b6010f6fbb850887a396c2bc0ab23974003008f6', data['token'].first
       assert_equal '1262304000', data['timestamp'].first
       assert_equal 'username@example.com', data['email'].first
@@ -32,7 +32,7 @@ class SsoTest < Test::Unit::TestCase
       end
 
       test 'builds path' do
-        assert_equal '/heroku/resources/1', @sso.path
+        assert_equal '/xplenty/resources/1', @sso.path
       end
 
       test 'builds full url' do
@@ -69,7 +69,7 @@ class SsoTest < Test::Unit::TestCase
       end
 
       test 'builds full url' do
-        expected = 'http://localhost:4567/heroku/resources/1'
+        expected = 'http://localhost:4567/xplenty/resources/1'
 
         assert @sso.full_url.include?(expected)
       end

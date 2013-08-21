@@ -1,6 +1,6 @@
 require 'webrick'
 
-class Heroku::Kensa::PostProxy < WEBrick::HTTPServer
+class Xplenty::Kensa::PostProxy < WEBrick::HTTPServer
   def initialize(sso)
     @params = sso.query_params
     @sso = sso

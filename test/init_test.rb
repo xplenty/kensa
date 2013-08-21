@@ -5,7 +5,7 @@ class InitTest < Test::Unit::TestCase
 
   def test_init_doesnt_overwite_addon_manifest
     File.open(@filename, 'w') { |f| f << '{}' }
-    any_instance_of(Heroku::Kensa::Client) do |client|
+    any_instance_of(Xplenty::Kensa::Client) do |client|
       stub(client).gets { 'n' }
       stub(client).print
       stub(client).puts

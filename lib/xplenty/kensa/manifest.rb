@@ -1,6 +1,6 @@
 require 'securerandom'
 
-module Heroku
+module Xplenty
   module Kensa
     class Manifest
       REGIONS = %w(us eu)
@@ -41,11 +41,11 @@ JSON
     "regions": [ "us" ],
     "password": "#{@password}",#{ sso_key }
     "production": {
-      "base_url": "https://yourapp.com/heroku/resources",
+      "base_url": "https://yourapp.com/xplenty/resources",
       "sso_url": "https://yourapp.com/sso/login"
     },
     "test": {
-      "base_url": "http://localhost:#{@port}/heroku/resources",
+      "base_url": "http://localhost:#{@port}/xplenty/resources",
       "sso_url": "http://localhost:#{@port}/sso/login"
     }
   }
@@ -57,8 +57,8 @@ JSON
       def foreman
         <<-ENV
 SSO_SALT=#{@sso_salt}
-HEROKU_USERNAME=myaddon
-HEROKU_PASSWORD=#{@password}
+XPLENTY_USERNAME=myaddon
+XPLENTY_PASSWORD=#{@password}
 ENV
       end
 

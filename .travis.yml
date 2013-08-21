@@ -7,5 +7,4 @@ rvm:
   - 1.9.3
 notifications:
   email:
-    - csquared@heroku.com
-    - glenn@heroku.com
+    - moty@xplenty.com

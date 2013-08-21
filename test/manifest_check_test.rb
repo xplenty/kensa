@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class ManifestCheckTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
 
   def check ; ManifestCheck ; end
 
@@ -115,7 +115,7 @@ class ManifestCheckTest < Test::Unit::TestCase
       end
 
       test "username is deprecated" do
-        @data["api"]["username"] = "heroku"
+        @data["api"]["username"] = "xplenty"
         assert_invalid
       end
     end

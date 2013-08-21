@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class DeprovisionCheckTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
 
   %w{get post}.each do |method|
     context "with SSO #{method}" do
