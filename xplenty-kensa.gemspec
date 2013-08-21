@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "xplenty/kensa/version"
 
 Gem::Specification.new do |s|
-  s.name = %q{kensa}
+  s.name = %q{xplenty-kensa}
   s.version = Xplenty::Kensa::VERSION
   s.platform = Gem::Platform::RUBY
 
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = %q{Kensa is a command-line tool to help add-on providers integrating their services with Xplenty. It manages manifest files, and provides a TDD-like approach for programmers to test and develop their APIs.}
   s.email = %q{moty@xplenty.com}
 
-  s.rubyforge_project = "kensa"
+  s.rubyforge_project = "xplenty-kensa"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.homepage = %q{http://www.xplenty.com}
-  s.rubygems_version = %q{1.0.0}
+  s.rubygems_version = %q{1.4.3}
   s.summary = %q{Tool to help Xplenty add-on providers integrating their services}
 
   s.add_development_dependency(%q<artifice>, [">= 0"])
