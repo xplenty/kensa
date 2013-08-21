@@ -3,7 +3,16 @@ require 'securerandom'
 module Xplenty
   module Kensa
     class Manifest
-      REGIONS = %w(us eu)
+      REGIONS = %w(
+        amazon-web-services::us-east-1 
+        amazon-web-services::us-west-2
+        amazon-web-services::eu-west-1
+        rackspace::dfw 
+        rackspace::ord
+        soft-layer::dal05
+        soft-layer::ams01
+        soft-layer::sng01
+      )
 
       def initialize(options = {})
         @method   = options.fetch(:method, 'post').to_sym
