@@ -23,7 +23,7 @@ module Xplenty
   "id": "myaddon",
   "api": {
     "config_vars": [ "MYADDON_URL" ],
-    "regions": [ "us" ],
+    "regions": [ "amazon-web-services::us-east-1" ],
     "password": "#{@password}",#{ sso_key }
     "production": "https://yourapp.com/",
     "test": "http://localhost:#{@port}/"
@@ -38,7 +38,7 @@ JSON
   "id": "myaddon",
   "api": {
     "config_vars": [ "MYADDON_URL" ],
-    "regions": [ "us" ],
+    "regions": [ "amazon-web-services::us-east-1" ],
     "password": "#{@password}",#{ sso_key }
     "production": {
       "base_url": "https://yourapp.com/xplenty/resources",

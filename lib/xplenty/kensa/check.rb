@@ -96,8 +96,8 @@ module Xplenty
           data["api"].has_key?("regions")
           data["api"]["regions"].is_a?(Array)
         end
-        check "contains at least the US region" do
-          data["api"]["regions"].include? "us"
+        check "contains at least the Amazon US East region" do
+          data["api"]["regions"].include? "amazon-web-services::us-east-1"
         end
         check "contains only valid region names" do
           data["api"]["regions"].all? { |reg| Manifest::REGIONS.include? reg }
