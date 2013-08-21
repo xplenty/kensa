@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kensa (1.0.0)
+    xplenty-kensa (1.4.5)
       launchy (>= 0.3.2)
       mechanize (~> 2.6.0)
       rest-client (>= 1.4.0, < 1.7.0)
@@ -103,10 +103,10 @@ DEPENDENCIES
   coveralls
   fakefs
   haml
-  kensa!
   rake
   rr
   ruby-debug
   ruby-debug19
   sinatra (>= 0.9)
   timecop (>= 0.3.5)
+  xplenty-kensa!

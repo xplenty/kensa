@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.homepage = %q{http://www.xplenty.com}
-  s.rubygems_version = %q{1.4.4}
+  s.rubygems_version = %q{1.4.5}
   s.summary = %q{Tool to help Xplenty add-on providers integrating their services}
 
   s.add_development_dependency(%q<artifice>, [">= 0"])
