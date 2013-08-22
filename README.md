@@ -20,7 +20,7 @@ Install it like any Ruby Gem:
 Refer to the Xplenty Add-ons Knowledgebase for more information on usage, and
 how to build your Xplenty add-on:
 
-<https://community.xplenty.com/knowledgebase/building-a-xplenty-add-on>
+<https://devcenter.heroku.com/articles/building-a-heroku-add-on>
 
 
 ## Meta #######################################################################
