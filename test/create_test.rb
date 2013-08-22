@@ -26,7 +26,7 @@ class CreateTest < Test::Unit::TestCase
   def test_assumes_xplenty_template
     kensa "create my_addon --template sinatra"
     assert_received Git do |git|
-      git.run("git clone git://github.com/xplenty/kensa-create-sinatra my_addon")
+      git.run("git clone git://github.com/xplenty/xplenty-kensa-create-sinatra my_addon")
     end
   end
 

@@ -11,8 +11,6 @@ require 'fakefs/safe'
 Coveralls.wear!
 
 class Test::Unit::TestCase
-  include RR::Adapters::TestUnit
-
   module ProviderMock
     def setup
       Artifice.activate_with(ProviderServer)

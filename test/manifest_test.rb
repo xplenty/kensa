@@ -27,8 +27,8 @@ class ManifestTest < Test::Unit::TestCase
       assert_equal @manifest.skeleton['api']['production'], 'https://yourapp.com/'
     end
 
-    test 'specifies the US region by default' do
-      assert_equal @manifest.skeleton['api']['regions'], ['us']
+    test 'specifies the Amazon US eas region by default' do
+      assert_equal @manifest.skeleton['api']['regions'], ['amazon-web-services::us-east-1']
     end
   end
 
@@ -45,8 +45,8 @@ class ManifestTest < Test::Unit::TestCase
       assert_equal @manifest.skeleton['api']['production']['sso_url'], 'https://yourapp.com/sso/login'
     end
 
-    test 'specifies the US region by default' do
-      assert_equal @manifest.skeleton['api']['regions'], ['us']
+    test 'specifies the Amazon US East region by default' do
+      assert_equal @manifest.skeleton['api']['regions'], ['amazon-web-services::us-east-1']
     end
   end
 

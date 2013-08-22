@@ -7,7 +7,7 @@ module Xplenty
         amazon-web-services::us-east-1 
         amazon-web-services::us-west-2
         amazon-web-services::eu-west-1
-        rackspace::dfw 
+        rackspace::dfw
         rackspace::ord
         soft-layer::dal05
         soft-layer::ams01
