@@ -4,12 +4,12 @@ lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 
 require 'rubygems'
-require 'heroku/kensa'
-require 'heroku/kensa/client'
+require 'xplenty/kensa'
+require 'xplenty/kensa/client'
 
 $stdout.sync = true
 
-include Heroku::Kensa
+include Xplenty::Kensa
 
 begin
   args = ARGV.dup
@@ -56,32 +56,32 @@ COMMANDS
 
   create <app>    Clone a git repo that contains a template add-on
 
-  test <type>     Simulate call from Heroku (provision or deprovision)
+  test <type>     Simulate call from Xplenty (provision or deprovision)
 
   run <command>   Provisions a resource and runs command in returned ENV
 
-  sso <id>        Launches the browser on a Heroku session for the specified id
+  sso <id>        Launches the browser on a Xplenty session for the specified id
 
-  push            Send the manifest to Heroku
+  push            Send the manifest to Xplenty
 
-  pull <id>       Fetch the latest manifest from Heroku
+  pull <id>       Fetch the latest manifest from Xplenty
 
 TEST TYPES
 
   provision [optional params] 
-    Simulate a provision call from Heroku.
+    Simulate a provision call from Xplenty.
     [optional params]
       accepts extra command options and passes them on to the provision request
       ie: kensa test provision --foo bar
 
   deprovision <id>
-    Simulate a deprovision call from Heroku.
+    Simulate a deprovision call from Xplenty.
 
   planchange <id> <new_plan>
-    Simulate a plan change call from Heroku.
+    Simulate a plan change call from Xplenty.
 
   sso <id>
-    Simulate a single sign-on call from Heroku.
+    Simulate a single sign-on call from Xplenty.
 
   manifest
     Confirm that the manifest is valid.  Automatically runs before all tests.

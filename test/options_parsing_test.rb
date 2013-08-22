@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class OptionParsingTest < Test::Unit::TestCase 
-  include Heroku::Kensa
+  include Xplenty::Kensa
   include FsMock
 
   def options_for_cmd(string)

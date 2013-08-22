@@ -1,5 +1,5 @@
-require 'heroku/kensa'
-require 'heroku/kensa/client'
+require 'xplenty/kensa'
+require 'xplenty/kensa/client'
 require 'contest'
 require 'coveralls'
 require 'timecop'
@@ -11,8 +11,6 @@ require 'fakefs/safe'
 Coveralls.wear!
 
 class Test::Unit::TestCase
-  include RR::Adapters::TestUnit
-
   module ProviderMock
     def setup
       Artifice.activate_with(ProviderServer)
@@ -40,7 +38,7 @@ class Test::Unit::TestCase
   end
 
   def kensa(command)
-    Heroku::Kensa::Client.new(command.split, :silent => true, :test => true).run!
+    Xplenty::Kensa::Client.new(command.split, :silent => true, :test => true).run!
   end
 
   def read_json(filename)
@@ -60,11 +58,11 @@ class Test::Unit::TestCase
   end
 
   def trace!
-    @screen = Heroku::Kensa::IOScreen.new(STDOUT)
+    @screen = Xplenty::Kensa::IOScreen.new(STDOUT)
   end
 
   def screen
-    @screen ||= Heroku::Kensa::IOScreen.new(StringIO.new("", 'w+'))
+    @screen ||= Xplenty::Kensa::IOScreen.new(StringIO.new("", 'w+'))
   end
 
   # call trace! in your test before the

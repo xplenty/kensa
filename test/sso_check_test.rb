@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class SsoCheckTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
   include ProviderMock
 
   def check ; SsoCheck ; end
@@ -34,7 +34,7 @@ class SsoCheckTest < Test::Unit::TestCase
         assert_invalid
       end
 
-      test "reject missing heroku layout" do
+      test "reject missing xplenty layout" do
         use_provider_endpoint("nolayout", 'sso')
         assert_invalid
       end

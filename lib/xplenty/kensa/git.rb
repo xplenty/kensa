@@ -1,4 +1,4 @@
-module Heroku
+module Xplenty
   module Kensa
     class Git
       class << self
@@ -20,15 +20,15 @@ module Heroku
           system(cmd)
         end
 
-        def heroku_prefix
-          ENV["REPO_PREFIX"] || "heroku/kensa-create-"
+        def xplenty_prefix
+          ENV["REPO_PREFIX"] || "xplenty/xplenty-kensa-create-"
         end
 
         def clone_url(name)
           if name.include? "://" #its a full url not on github
             return name
           elsif !name.include? "/" #its one of ours 
-            name = heroku_prefix + name
+            name = xplenty_prefix + name
           end
 
           "git://github.com/#{name}"
