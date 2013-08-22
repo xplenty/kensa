@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class CreateTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
 
   def setup
     stub(Git).run
@@ -23,24 +23,24 @@ class CreateTest < Test::Unit::TestCase
     end
   end
 
-  def test_assumes_heroku_template
+  def test_assumes_xplenty_template
     kensa "create my_addon --template sinatra"
     assert_received Git do |git|
-      git.run("git clone git://github.com/heroku/kensa-create-sinatra my_addon")
+      git.run("git clone git://github.com/xplenty/xplenty-kensa-create-sinatra my_addon")
     end
   end
 
   def test_assumes_github
-    kensa "create my_addon --template heroku/sinatra"
+    kensa "create my_addon --template xplenty/sinatra"
     assert_received Git do |git|
-      git.run("git clone git://github.com/heroku/sinatra my_addon")
+      git.run("git clone git://github.com/xplenty/sinatra my_addon")
     end
   end
 
   def test_allows_full_url
-    kensa "create my_addon --template git://heroku.com/sinatra.git"
+    kensa "create my_addon --template git://xplenty.com/sinatra.git"
     assert_received Git do |git|
-      git.run("git clone git://heroku.com/sinatra.git my_addon")
+      git.run("git clone git://xplenty.com/sinatra.git my_addon")
     end
   end
 end

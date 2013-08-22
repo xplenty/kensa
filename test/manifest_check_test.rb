@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class ManifestCheckTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
 
   def check ; ManifestCheck ; end
 
@@ -41,12 +41,12 @@ class ManifestCheckTest < Test::Unit::TestCase
       end
 
       test "api has a list of regions including US" do
-        @data["api"]["regions"] = ["eu"]
+        @data["api"]["regions"] = ["amazon-web-services::us-east-1", "invalid region"]
         assert_invalid
       end
 
       test "api only allows valid region names" do
-        @data["api"]["regions"] = ["us", "ap"]
+        @data["api"]["regions"] = ["invalid region"]
         assert_invalid
       end
 
@@ -115,7 +115,7 @@ class ManifestCheckTest < Test::Unit::TestCase
       end
 
       test "username is deprecated" do
-        @data["api"]["username"] = "heroku"
+        @data["api"]["username"] = "xplenty"
         assert_invalid
       end
     end

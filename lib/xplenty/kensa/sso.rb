@@ -1,7 +1,7 @@
 require 'restclient'
 require 'uri'
 
-module Heroku
+module Xplenty
   module Kensa
     class Sso
       attr_accessor :id, :url, :proxy_port, :timestamp, :token
@@ -25,7 +25,7 @@ module Heroku
         if self.POST? 
           URI.parse(url).path
         else
-          "/heroku/resources/#{id}"
+          "/xplenty/resources/#{id}"
         end
       end
 

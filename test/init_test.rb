@@ -5,7 +5,7 @@ class InitTest < Test::Unit::TestCase
 
   def test_init_doesnt_overwite_addon_manifest
     File.open(@filename, 'w') { |f| f << '{}' }
-    any_instance_of(Heroku::Kensa::Client) do |client|
+    any_instance_of(Xplenty::Kensa::Client) do |client|
       stub(client).gets { 'n' }
       stub(client).print
       stub(client).puts
@@ -47,8 +47,8 @@ class InitTest < Test::Unit::TestCase
 
   def assert_foreman_env(env, manifest)
     assert env.include?("SSO_SALT=#{manifest['api']['sso_salt']}\n")
-    assert env.include?("HEROKU_USERNAME=#{manifest['id']}\n")
-    assert env.include?("HEROKU_PASSWORD=#{manifest['api']['password']}")
+    assert env.include?("XPLENTY_USERNAME=#{manifest['id']}\n")
+    assert env.include?("XPLENTY_PASSWORD=#{manifest['api']['password']}")
   end
 
   def test_init_with_foreman_flag_and_get

@@ -3,7 +3,7 @@ require 'socket'
 require 'timeout'
 require 'uri'
 
-module Heroku
+module Xplenty
   module Kensa
     class Check
       attr_accessor :screen, :data
@@ -96,8 +96,8 @@ module Heroku
           data["api"].has_key?("regions")
           data["api"]["regions"].is_a?(Array)
         end
-        check "contains at least the US region" do
-          data["api"]["regions"].include? "us"
+        check "contains at least the Amazon US East region" do
+          data["api"]["regions"].include? "amazon-web-services::us-east-1"
         end
         check "contains only valid region names" do
           data["api"]["regions"].all? { |reg| Manifest::REGIONS.include? reg }
@@ -232,12 +232,12 @@ module Heroku
         if data['api'][env].is_a? Hash
           URI.parse(data['api'][env]['base_url']).path
         else
-          '/heroku/resources'
+          '/xplenty/resources'
         end
       end
 
-      def heroku_id
-        "app#{rand(10000)}@kensa.heroku.com"
+      def xplenty_id
+        "app#{rand(10000)}@kensa.xplenty.com"
       end
 
       def credentials
@@ -260,7 +260,7 @@ module Heroku
         reader, writer = nil
 
         payload = {
-          :heroku_id => heroku_id,
+          :xplenty_id => xplenty_id,
           :plan => data[:plan] || 'test',
           :callback_url => callback, 
           :logplex_token => nil,
@@ -271,7 +271,7 @@ module Heroku
           reader, writer = IO.pipe
         end
 
-        test "POST /heroku/resources"
+        test "POST /xplenty/resources"
         check "response" do
           if data[:async]
             child = fork do
@@ -379,7 +379,7 @@ module Heroku
         raise ArgumentError, "No plan specified" if new_plan.nil?
 
         path = "#{base_path}/#{CGI::escape(id.to_s)}"
-        payload = {:plan => new_plan, :heroku_id => heroku_id}
+        payload = {:plan => new_plan, :xplenty_id => xplenty_id}
 
         test "PUT #{path}"
         check "response" do
@@ -456,17 +456,17 @@ module Heroku
           true
         end
 
-        check "creates the heroku-nav-data cookie" do
-          cookie = agent.cookie_jar.cookies(URI.parse(@sso.full_url)).detect { |c| c.name == 'heroku-nav-data' }
-          error("could not find cookie heroku-nav-data") unless cookie
+        check "creates the xplenty-nav-data cookie" do
+          cookie = agent.cookie_jar.cookies(URI.parse(@sso.full_url)).detect { |c| c.name == 'xplenty-nav-data' }
+          error("could not find cookie xplenty-nav-data") unless cookie
           error("expected #{@sso.sample_nav_data}, got #{cookie.value}") unless cookie.value == @sso.sample_nav_data
           true
         end
 
-        check "displays the heroku layout" do
-            if page_logged_in.search('div#heroku-header').empty? &&
+        check "displays the xplenty layout" do
+            if page_logged_in.search('div#xplenty-header').empty? &&
               page_logged_in.search('script[src*=boomerang]').empty?
-              error("could not find Heroku layout")
+              error("could not find Xplenty layout")
             end
           true
         end

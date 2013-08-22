@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class ProvisionResponseCheckTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
 
   def check ; ProvisionResponseCheck ; end
 

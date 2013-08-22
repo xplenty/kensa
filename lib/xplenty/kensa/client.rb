@@ -3,7 +3,7 @@ require 'term/ansicolor'
 require 'launchy'
 require 'optparse'
 
-module Heroku
+module Xplenty
   module Kensa
     class Client
       attr_accessor :options
@@ -87,12 +87,12 @@ module Heroku
 
       def push
         user, password = ask_for_credentials
-        host     = heroku_host
+        host     = xplenty_host
         data     = decoded_manifest
         resource = RestClient::Resource.new(host, user, password)
         resource['provider/addons'].post(resolve_manifest, headers)
         puts "-----> Manifest for \"#{data['id']}\" was pushed successfully"
-        puts "       Continue at #{(heroku_host)}/provider/addons/#{data['id']}"
+        puts "       Continue at #{(xplenty_host)}/provider/addons/#{data['id']}"
       rescue RestClient::UnprocessableEntity, RestClient::BadRequest => e
         abort("FAILED: #{e.response}")
       rescue RestClient::Unauthorized
@@ -106,7 +106,7 @@ module Heroku
         protect_current_manifest!
 
         user, password = ask_for_credentials
-        host     = heroku_host
+        host     = xplenty_host
         resource = RestClient::Resource.new(host, user, password)
         manifest = resource["provider/addons/#{addon}"].get(headers)
         File.open(filename, 'w') { |f| f.puts manifest }
@@ -138,8 +138,8 @@ module Heroku
           { :accept => :json, "X-Kensa-Version" => "1", "User-Agent" => "kensa/#{VERSION}" }
         end
 
-        def heroku_host
-          ENV['ADDONS_URL'] || 'https://addons.heroku.com'
+        def xplenty_host
+          ENV['ADDONS_URL'] || 'https://addons.xplenty.com'
         end
 
         def resolve_manifest
@@ -186,7 +186,7 @@ module Heroku
         end
 
         def ask_for_credentials
-          puts "Enter your Heroku Provider credentials."
+          puts "Enter your Xplenty Provider credentials."
 
           print "Email: "
           user = gets.strip

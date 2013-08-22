@@ -1,9 +1,18 @@
 require 'securerandom'
 
-module Heroku
+module Xplenty
   module Kensa
     class Manifest
-      REGIONS = %w(us eu)
+      REGIONS = %w(
+        amazon-web-services::us-east-1 
+        amazon-web-services::us-west-2
+        amazon-web-services::eu-west-1
+        rackspace::dfw
+        rackspace::ord
+        soft-layer::dal05
+        soft-layer::ams01
+        soft-layer::sng01
+      )
 
       def initialize(options = {})
         @method   = options.fetch(:method, 'post').to_sym
@@ -23,7 +32,7 @@ module Heroku
   "id": "myaddon",
   "api": {
     "config_vars": [ "MYADDON_URL" ],
-    "regions": [ "us" ],
+    "regions": [ "amazon-web-services::us-east-1" ],
     "password": "#{@password}",#{ sso_key }
     "production": "https://yourapp.com/",
     "test": "http://localhost:#{@port}/"
@@ -38,14 +47,14 @@ JSON
   "id": "myaddon",
   "api": {
     "config_vars": [ "MYADDON_URL" ],
-    "regions": [ "us" ],
+    "regions": [ "amazon-web-services::us-east-1" ],
     "password": "#{@password}",#{ sso_key }
     "production": {
-      "base_url": "https://yourapp.com/heroku/resources",
+      "base_url": "https://yourapp.com/xplenty/resources",
       "sso_url": "https://yourapp.com/sso/login"
     },
     "test": {
-      "base_url": "http://localhost:#{@port}/heroku/resources",
+      "base_url": "http://localhost:#{@port}/xplenty/resources",
       "sso_url": "http://localhost:#{@port}/sso/login"
     }
   }
@@ -57,8 +66,8 @@ JSON
       def foreman
         <<-ENV
 SSO_SALT=#{@sso_salt}
-HEROKU_USERNAME=myaddon
-HEROKU_PASSWORD=#{@password}
+XPLENTY_USERNAME=myaddon
+XPLENTY_PASSWORD=#{@password}
 ENV
       end
 

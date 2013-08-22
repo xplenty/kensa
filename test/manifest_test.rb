@@ -1,7 +1,7 @@
 require 'test/helper'
 
 class ManifestTest < Test::Unit::TestCase
-  include Heroku::Kensa
+  include Xplenty::Kensa
 
   context 'GET manifest' do
     setup { @manifest = Manifest.new(:method => :get) }
@@ -27,8 +27,8 @@ class ManifestTest < Test::Unit::TestCase
       assert_equal @manifest.skeleton['api']['production'], 'https://yourapp.com/'
     end
 
-    test 'specifies the US region by default' do
-      assert_equal @manifest.skeleton['api']['regions'], ['us']
+    test 'specifies the Amazon US eas region by default' do
+      assert_equal @manifest.skeleton['api']['regions'], ['amazon-web-services::us-east-1']
     end
   end
 
@@ -36,17 +36,17 @@ class ManifestTest < Test::Unit::TestCase
     setup { @manifest = Manifest.new(:method => :post) }
 
     test 'uses post format for test url' do
-      assert_equal @manifest.skeleton['api']['test']['base_url'], 'http://localhost:4567/heroku/resources'
+      assert_equal @manifest.skeleton['api']['test']['base_url'], 'http://localhost:4567/xplenty/resources'
       assert_equal @manifest.skeleton['api']['test']['sso_url'],  'http://localhost:4566/sso/login'
     end
 
     test 'uses post format for test url' do
-      assert_equal @manifest.skeleton['api']['production']['base_url'], 'https://yourapp.com/heroku/resources'
+      assert_equal @manifest.skeleton['api']['production']['base_url'], 'https://yourapp.com/xplenty/resources'
       assert_equal @manifest.skeleton['api']['production']['sso_url'], 'https://yourapp.com/sso/login'
     end
 
-    test 'specifies the US region by default' do
-      assert_equal @manifest.skeleton['api']['regions'], ['us']
+    test 'specifies the Amazon US East region by default' do
+      assert_equal @manifest.skeleton['api']['regions'], ['amazon-web-services::us-east-1']
     end
   end
 

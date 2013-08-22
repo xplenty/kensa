@@ -1,4 +1,4 @@
-module Heroku
+module Xplenty
   module Kensa
 
     class NilScreen

@@ -9,14 +9,14 @@ end
 
 class ProviderServer < Sinatra::Base
 helpers do
-  def heroku_only!
-    unless auth_heroku?
+  def xplenty_only!
+    unless auth_xplenty?
       response['WWW-Authenticate'] = %(Basic realm="Kensa Test Server")
       unauthorized!(401)
     end
   end
 
-  def auth_heroku?
+  def auth_xplenty?
     @auth ||=  Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['myaddon', 'secret']
   end
@@ -36,87 +36,87 @@ helpers do
     end
   end
   
-  def login(heroku_user=true)
-  @header = heroku_user
+  def login(xplenty_user=true)
+  @header = xplenty_user
   haml <<-HAML
 %html
 %body
   - if @header
-    #heroku-header
-      %h1 Heroku
+    #xplenty-header
+      %h1 Xplenty
   %h1 Sample Addon
 HAML
   end
 end
 
-post '/heroku/resources' do
-  heroku_only!
+post '/xplenty/resources' do
+  xplenty_only!
   { :id => 123 }.to_json
 end
 
-post '/working/heroku/resources' do
-  json_must_include(%w{heroku_id plan callback_url logplex_token options})
-  heroku_only!
+post '/working/xplenty/resources' do
+  json_must_include(%w{xplenty_id plan callback_url logplex_token options})
+  xplenty_only!
   { :id => 123 }.to_json
 end
 
-post '/cmd-line-options/heroku/resources' do
-  heroku_only!
+post '/cmd-line-options/xplenty/resources' do
+  xplenty_only!
   options = OkJson.decode(request.body.read)['options']
   raise "Where are my options?" unless options['foo'] && options['bar']
   { :id => 123 }.to_json
 end
 
-post '/foo/heroku/resources' do
-  heroku_only!
+post '/foo/xplenty/resources' do
+  xplenty_only!
   'foo'
 end
 
-post '/invalid-json/heroku/resources' do
-  heroku_only!
+post '/invalid-json/xplenty/resources' do
+  xplenty_only!
   'invalidjson'
 end
 
-post '/invalid-response/heroku/resources' do
-  heroku_only!
+post '/invalid-response/xplenty/resources' do
+  xplenty_only!
   'null'
 end
 
-post '/invalid-status/heroku/resources' do
-  heroku_only!
+post '/invalid-status/xplenty/resources' do
+  xplenty_only!
   status 422
   { :id => 123 }.to_json
 end
 
-post '/invalid-missing-id/heroku/resources' do
-  heroku_only!
+post '/invalid-missing-id/xplenty/resources' do
+  xplenty_only!
   { :noid => 123 }.to_json
 end
 
-post '/invalid-missing-auth/heroku/resources' do
+post '/invalid-missing-auth/xplenty/resources' do
   { :id => 123 }.to_json
 end
 
 
-put '/working/heroku/resources/:id' do
-  json_must_include(%w{heroku_id plan})
-  heroku_only!
+put '/working/xplenty/resources/:id' do
+  json_must_include(%w{xplenty_id plan})
+  xplenty_only!
   {}.to_json
 end
 
-put '/invalid-missing-auth/heroku/resources/:id' do
+put '/invalid-missing-auth/xplenty/resources/:id' do
   { :id => 123 }.to_json
 end
 
-put '/invalid-status/heroku/resources/:id' do
-  heroku_only!
+put '/invalid-status/xplenty/resources/:id' do
+  xplenty_only!
   status 422
   {}.to_json
 end
 
 
-delete '/working/heroku/resources/:id' do
-  heroku_only!
+delete '/working/xplenty/resources/:id' do
+  xplenty_only!
   "Ok"
 end
 
@@ -124,11 +124,11 @@ def sso
   unauthorized! unless params[:id] && params[:token]
   unauthorized! unless params[:timestamp].to_i > (Time.now-60*2).to_i
   unauthorized! unless params[:token] == make_token
-  response.set_cookie('heroku-nav-data', params['nav-data'])
+  response.set_cookie('xplenty-nav-data', params['nav-data'])
   login
 end
 
-get '/working/heroku/resources/:id' do
+get '/working/xplenty/resources/:id' do
   sso
 end
 
@@ -140,11 +140,11 @@ end
 def notoken
   unauthorized! unless params[:id] && params[:token]
   unauthorized! unless params[:timestamp].to_i > (Time.now-60*2).to_i
-  response.set_cookie('heroku-nav-data', params['nav-data'])
+  response.set_cookie('xplenty-nav-data', params['nav-data'])
   login
 end
 
-get '/notoken/heroku/resources/:id' do
+get '/notoken/xplenty/resources/:id' do
   notoken
 end
 
@@ -155,11 +155,11 @@ end
 def notimestamp
   unauthorized! unless params[:id] && params[:token]
   unauthorized! unless params[:token] == make_token
-  response.set_cookie('heroku-nav-data', params['nav-data'])
+  response.set_cookie('xplenty-nav-data', params['nav-data'])
   login
 end
 
-get '/notimestamp/heroku/resources/:id' do
+get '/notimestamp/xplenty/resources/:id' do
   notimestamp
 end
 
@@ -171,11 +171,11 @@ def nolayout
   unauthorized! unless params[:id] && params[:token]
   unauthorized! unless params[:timestamp].to_i > (Time.now-60*2).to_i
   unauthorized! unless params[:token] == make_token
-  response.set_cookie('heroku-nav-data', params['nav-data'])
+  response.set_cookie('xplenty-nav-data', params['nav-data'])
   login(false)
 end
 
-get '/nolayout/heroku/resources/:id' do
+get '/nolayout/xplenty/resources/:id' do
   nolayout
 end
 
@@ -190,7 +190,7 @@ def nocookie
   login
 end
 
-get '/nocookie/heroku/resources/:id' do
+get '/nocookie/xplenty/resources/:id' do
   nocookie
 end
 
@@ -202,11 +202,11 @@ def badcookie
   unauthorized! unless params[:id] && params[:token]
   unauthorized! unless params[:timestamp].to_i > (Time.now-60*2).to_i
   unauthorized! unless params[:token] == make_token
-  response.set_cookie('heroku-nav-data', 'wrong value')
+  response.set_cookie('xplenty-nav-data', 'wrong value')
   login
 end
 
-get '/badcookie/heroku/resources/:id' do
+get '/badcookie/xplenty/resources/:id' do
   badcookie
 end
 
@@ -219,7 +219,7 @@ def sso_user
   sso
 end
 
-get '/user/heroku/resources/:id' do
+get '/user/xplenty/resources/:id' do
   sso_user
 end
 
